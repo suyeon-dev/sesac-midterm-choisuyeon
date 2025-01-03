@@ -26,7 +26,7 @@ exports.readOne = async (req, res) => {
     res.send(result);
   } catch (err) {
     console.log("err", err);
-    res.stauts(500).send("internal server error");
+    res.status(500).send("internal server error");
   }
 };
 
@@ -43,7 +43,7 @@ exports.create = async (req, res) => {
     res.send(result);
   } catch (err) {
     console.log("err", err);
-    res.stauts(500).send("internal server error");
+    res.status(500).send("internal server error");
   }
 };
 
@@ -52,5 +52,15 @@ exports.update = async (req, res) => {};
 
 /* 기존 Todo 삭제 */
 exports.delete = async (req, res) => {
-  console.log("삭제 req.body", req.body);
+  console.log("삭제 req.params", req.params);
+  console.log("삭제 req.params.id", req.params.id);
+
+  try {
+    const result = await Todo.destroy({
+      where: { id: req.params.id },
+    });
+  } catch (err) {
+    console.log("err", err);
+    res.status(500).send("internal server error");
+  }
 };
