@@ -80,6 +80,14 @@ exports.update = async (req, res) => {
       }
     );
     console.log("수정 결과 확인:", result);
+    console.log(Boolean(result));
+
+    // todo:
+    // if (Boolean(result)) {
+    //   res.send(result);
+    // } else {
+    //   res.send({ message: "Todo not found" });
+    // }
   } catch (err) {
     console.log("err", err);
     res.status(500).send("internal server error");
@@ -98,7 +106,10 @@ exports.delete = async (req, res) => {
     console.log("삭제 result 확인:", result);
 
     if (result) {
-      res.send(result);
+      res.send({
+        message: "Todo deleted successfully",
+        deletedId: req.params.id,
+      });
     } else {
       res.status(404).send({ message: "Todo not found" });
     }
