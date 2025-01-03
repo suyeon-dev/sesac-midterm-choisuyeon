@@ -14,7 +14,20 @@ exports.readAll = async (req, res) => {
 /* Todo 한 개 불러오기 */
 exports.readOne = async (req, res) => {
   console.log("req.params", req.params);
-  console.log("req.query", req.query);
+  console.log("id", req.params.id);
+
+  try {
+    const result = await Todo.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    console.log("findOne 결과 확인", result);
+    res.send(result);
+  } catch (err) {
+    console.log("err", err);
+    res.stauts(500).send("internal server error");
+  }
 };
 
 /* 새로운 Todo 생성 */
