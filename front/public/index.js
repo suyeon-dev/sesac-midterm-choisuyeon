@@ -47,10 +47,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // 폰트 색 변경, 취소선 추가
     checkbox.addEventListener("change", (e) => {
       if (e.currentTarget.checked) {
-        text.style.textDecoration = "line-through";
-        text.style.color = "lightgray";
+        // console.log("체크박스 클릭", e.currentTarget.checked);
+        item.style.textDecoration = "line-through";
+        item.style.color = "lightgray";
       } else {
-        text.style.textDecoration = "none";
+        item.style.textDecoration = "none";
       }
     });
 
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     deleteBtn.addEventListener("click", (e) => {
       todoList.removeChild(e.currentTarget.parentNode);
     });
-    input.value = "";
+    todoInput.value = "";
   });
 });
 
