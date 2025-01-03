@@ -23,7 +23,12 @@ exports.readOne = async (req, res) => {
       },
     });
     console.log("findOne 결과 확인", result);
-    res.send(result);
+
+    if (result) {
+      res.send(result);
+    } else {
+      res.status(404).send({ message: "Todo not found" });
+    }
   } catch (err) {
     console.log("err", err);
     res.status(500).send("internal server error");
@@ -48,7 +53,29 @@ exports.create = async (req, res) => {
 };
 
 /* 기존 Todo 수정 */
-exports.update = async (req, res) => {};
+// todo: 에러 수정해야함
+exports.update = async (req, res) => {
+  console.log("수정 req.body", req.body); //{ done: true }
+
+  try {
+    const [result] = await Todo.update(
+      {
+        title: req.body.title,
+        done: req.body.done,
+      },
+      {
+        where: {
+          id: req.body.id,
+        },
+      }
+    );
+
+    console.log("수정 결과 확인:", result);
+  } catch (err) {
+    console.log("err", err);
+    res.status(500).send("internal server error");
+  }
+};
 
 /* 기존 Todo 삭제 */
 exports.delete = async (req, res) => {
