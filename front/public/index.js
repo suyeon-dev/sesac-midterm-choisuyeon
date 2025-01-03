@@ -1,6 +1,49 @@
 /* 1. https://jsonplaceholder.typicode.com/todos 로부터 데이터를 불러와서 추가해주는 함수 getTodos() 선언 */
 // getTodos()는 추후에 HTML DOM 내용이 완전히 로드되었을 때 실행되어야 합니다.
-async function getTodos() {}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const addTodo = document.getElementById("addTodo"); //작성 버튼
+  const todoList = document.getElementById("todoList"); //할일목록 공간
+  const todoInput = document.getElementById("todoInput"); //todo 입력창
+
+  // 1. 데이터 불러오기
+  async function getTodos() {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((res) => {
+        console.log("res", res);
+        return res.json(); //response 객체 json 본문 -> js객체 변환
+      })
+      .then((data) => {
+        console.log("data", data);
+      });
+  }
+
+  // 2. 할일 추가
+  addTodo.addEventListener("click", () => {
+    const item = document.createElement("div");
+    // 체크박스
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    // 텍스트
+    const text = document.createElement("span");
+    // 삭제 버튼
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "X";
+
+    // 할일 추가하기
+    if (!todoInput.value) {
+      alert("내용을 입력해주세요");
+    } else {
+      item.textContent = todoInput.value;
+      todoInput.value = ""; // 초기화
+
+      item.appendChild(checkbox);
+      item.appendChild(text);
+      item.appendChild(deleteBtn);
+      todoList.appendChild(item);
+    }
+  });
+});
 
 /* 
   2. 새로운 입력창의 Todo를 Todo 목록에 추가하고, 입력창을 초기화합니다.
@@ -8,7 +51,6 @@ async function getTodos() {}
   - 작성 버튼 클릭 시 addTodo() 함수가 실행됩니다.
   - 입력 창에서 Enter 키 입력시에도 addTodo() 함수가 실행됩니다.
 */
-function addTodo() {}
 
 /*  3. x 버튼을 클릭하면 클릭한 버튼을 갖는 Todo 항목이 삭제됩니다. */
 // 삭제 함수의 이름 및 모양 변경 가능

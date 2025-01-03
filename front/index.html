@@ -4,6 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>최수연</title>
+    <link rel="stylesheet" href="./public/index.css" />
+    <script defer src="./public/index.js"></script>
   </head>
-  <body></body>
+  <body>
+    <div class="outer">
+      <div class="inner">
+        <header></header>
+        <!-- 작성 창 -->
+        <div>
+          <input type="text" id="todoInput" placeholder="today's todo" />
+          <button id="addTodo">작성</button>
+        </div>
+
+        <!-- 할 일 목록 -->
+        <div class="todos" id="todoList"></div>
+      </div>
+    </div>
+  </body>
 </html>
