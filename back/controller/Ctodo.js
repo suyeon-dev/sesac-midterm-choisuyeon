@@ -31,10 +31,26 @@ exports.readOne = async (req, res) => {
 };
 
 /* 새로운 Todo 생성 */
-exports.create = async (req, res) => {};
+exports.create = async (req, res) => {
+  console.log("req.body", req.body);
+
+  try {
+    const result = await Todo.create({
+      title: req.body.title,
+      done: req.body.done,
+    });
+    console.log("새로운 todo생성 결과 확인", result);
+    res.send(result);
+  } catch (err) {
+    console.log("err", err);
+    res.stauts(500).send("internal server error");
+  }
+};
 
 /* 기존 Todo 수정 */
 exports.update = async (req, res) => {};
 
 /* 기존 Todo 삭제 */
-exports.delete = async (req, res) => {};
+exports.delete = async (req, res) => {
+  console.log("삭제 req.body", req.body);
+};
