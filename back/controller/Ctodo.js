@@ -69,7 +69,6 @@ exports.update = async (req, res) => {
         },
       }
     );
-
     console.log("수정 결과 확인:", result);
   } catch (err) {
     console.log("err", err);
@@ -86,6 +85,13 @@ exports.delete = async (req, res) => {
     const result = await Todo.destroy({
       where: { id: req.params.id },
     });
+    console.log("삭제 result 확인:", result);
+
+    if (result) {
+      res.send(result);
+    } else {
+      res.status(404).send({ message: "Todo not found" });
+    }
   } catch (err) {
     console.log("err", err);
     res.status(500).send("internal server error");
