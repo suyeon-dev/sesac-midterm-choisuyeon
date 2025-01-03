@@ -65,7 +65,8 @@ exports.create = async (req, res) => {
 /* 기존 Todo 수정 */
 exports.update = async (req, res) => {
   console.log("수정 req.body", req.body); //{ done: true }
-  console.log("수정 req.params", req.params);
+  console.log("수정 req.params", req.params); //{ id: '1' }
+  //   console.log("수정 req", req);
 
   try {
     const [result] = await Todo.update(
@@ -85,7 +86,8 @@ exports.update = async (req, res) => {
     // todo:
     // if (Boolean(result)) {
     //   res.send(result);
-    // } else {
+    // }
+    // else {
     //   res.send({ message: "Todo not found" });
     // }
   } catch (err) {
