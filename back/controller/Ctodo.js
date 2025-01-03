@@ -45,7 +45,17 @@ exports.create = async (req, res) => {
       done: req.body.done,
     });
     console.log("새로운 todo생성 결과 확인", result);
-    res.send(result);
+    console.log("새로운 todo 제목 확인:", result.title);
+
+    if (result) {
+      res.send(result);
+    } else if (result.title) {
+      // case2
+      res.send({ title: result.title });
+    } else if (result.done) {
+      // todo: case3...?
+      res.send({ done: result.done });
+    }
   } catch (err) {
     console.log("err", err);
     res.status(500).send("internal server error");
@@ -53,19 +63,19 @@ exports.create = async (req, res) => {
 };
 
 /* 기존 Todo 수정 */
-// todo: 에러 수정해야함
 exports.update = async (req, res) => {
   console.log("수정 req.body", req.body); //{ done: true }
+  console.log("수정 req.params", req.params);
 
   try {
     const [result] = await Todo.update(
       {
-        title: req.body.title,
+        // title: req.body.title,
         done: req.body.done,
       },
       {
         where: {
-          id: req.body.id,
+          id: req.params.id,
         },
       }
     );
