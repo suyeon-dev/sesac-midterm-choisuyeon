@@ -43,6 +43,17 @@ document.addEventListener("DOMContentLoaded", () => {
       todoList.appendChild(item);
     }
 
+    // 체크 박스 클릭 시
+    // 폰트 색 변경, 취소선 추가
+    checkbox.addEventListener("change", (e) => {
+      if (e.currentTarget.checked) {
+        text.style.textDecoration = "line-through";
+        text.style.color = "lightgray";
+      } else {
+        text.style.textDecoration = "none";
+      }
+    });
+
     // 제거하기 버튼
     deleteBtn.addEventListener("click", (e) => {
       todoList.removeChild(e.currentTarget.parentNode);
