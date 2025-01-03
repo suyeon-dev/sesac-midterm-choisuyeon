@@ -42,6 +42,12 @@ document.addEventListener("DOMContentLoaded", () => {
       item.appendChild(deleteBtn);
       todoList.appendChild(item);
     }
+
+    // 제거하기 버튼
+    deleteBtn.addEventListener("click", (e) => {
+      todoList.removeChild(e.currentTarget.parentNode);
+    });
+    input.value = "";
   });
 });
 
